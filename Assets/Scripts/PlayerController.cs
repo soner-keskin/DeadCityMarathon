@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,15 +9,16 @@ public class PlayerController : MonoBehaviour
     public float horizontalInput;
     bool isFacingRight = true;
     float jumpPower = 3.0f;
-    bool isJumping = false;
+    bool isGrounded = false;
 
 
     Rigidbody2D rb;
-    
+    Animator animator;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -28,10 +30,11 @@ public class PlayerController : MonoBehaviour
 
         FlipSprite();
 
-        if(Input.GetButtonDown("Jump") && !isJumping) {
+        if(Input.GetButtonDown("Jump") && isGrounded) {
         
             rb.velocity = new Vector2 (rb.velocity.x, jumpPower);
-            isJumping = true;
+            isGrounded = false;
+            animator.SetBool("isJumping", !isGrounded);
         
         
         }
@@ -42,6 +45,8 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
+        animator.SetFloat("xVelocity", Math.Abs(rb.velocity.x));
+        animator.SetFloat("yVelocity", rb.velocity.y);
     }
 
     void FlipSprite()
@@ -58,8 +63,10 @@ public class PlayerController : MonoBehaviour
 
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        isJumping = false;
+        isGrounded = true;
+        animator.SetBool("isJumping", !isGrounded);
     }
 }
