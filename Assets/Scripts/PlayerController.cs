@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 1.0f;
     public float horizontalInput;
     bool isFacingRight = true;
-    float jumpPower = 3.0f;
+    public float jumpPower = 3.0f;
     bool isGrounded = false;
 
 
@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("yVelocity", rb.velocity.y);
     }
 
-    void FlipSprite()
+    void FlipSprite() // sprite'ý döndürme
     {
 
         if(isFacingRight && horizontalInput < 0f || !isFacingRight && horizontalInput > 0f)
