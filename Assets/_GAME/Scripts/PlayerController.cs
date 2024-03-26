@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float jumpPower = 3.0f;
     bool isFacingRight = true;
     bool isGrounded = false;
+    bool isDead = false;
 
 
     Rigidbody2D rb;
@@ -25,21 +26,25 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        horizontalInput = Input.GetAxis("Horizontal");
-
-
-        FlipSprite();
-
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (!isDead)
         {
+            horizontalInput = Input.GetAxis("Horizontal");
 
-            rb.velocity = new Vector2(rb.velocity.x, jumpPower);
-            isGrounded = false;
-            animator.SetBool("isJumping", !isGrounded);
 
+            FlipSprite();
+
+            if (Input.GetButtonDown("Jump") && isGrounded)
+            {
+
+                rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+                isGrounded = false;
+                animator.SetBool("isJumping", !isGrounded);
+
+
+            }
 
         }
+        
 
 
     }
@@ -51,7 +56,7 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("yVelocity", rb.velocity.y);
     }
 
-    void FlipSprite() // sprite'ý döndürme
+    void FlipSprite() 
     {
 
         if (isFacingRight && horizontalInput < 0f || !isFacingRight && horizontalInput > 0f)
@@ -76,5 +81,17 @@ public class PlayerController : MonoBehaviour
     {
 
         return horizontalInput == 0 && isGrounded == true;
+    }
+
+    public void Die()
+    {
+        isDead = true;
+
+        animator.SetTrigger("die");
+
+        moveSpeed = 0f;
+
+        
+
     }
 }
