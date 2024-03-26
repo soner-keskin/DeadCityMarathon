@@ -9,12 +9,12 @@ public class EnemyFollow : MonoBehaviour
     public float speed;
     
     private Animator animator;
-    private Rigidbody2D rb;
+    
     // Start is called before the first frame update
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        rb = GetComponent<Rigidbody2D>();
+        
 
 
     }
@@ -26,8 +26,7 @@ public class EnemyFollow : MonoBehaviour
     {
         
        transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-        rb.velocity = new Vector2(speed, rb.velocity.y);
-        animator.SetFloat("xVelo", Math.Abs(rb.velocity.x));
+        
 
 
 

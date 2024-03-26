@@ -33,6 +33,7 @@ public class ZombieDamage : MonoBehaviour
         }
     }
 
+    
     private void ZombieAttack()
     {
         animator.SetTrigger("attack");
