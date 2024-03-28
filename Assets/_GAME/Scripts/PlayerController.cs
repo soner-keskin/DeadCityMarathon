@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("yVelocity", rb.velocity.y);
     }
 
-    void FlipSprite() 
+    public void FlipSprite() 
     {
 
         if (isFacingRight && horizontalInput < 0f || !isFacingRight && horizontalInput > 0f)

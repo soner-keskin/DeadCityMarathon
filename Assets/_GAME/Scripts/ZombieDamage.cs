@@ -9,6 +9,7 @@ public class ZombieDamage : MonoBehaviour
     Animator animator;
     
 
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -27,6 +28,7 @@ public class ZombieDamage : MonoBehaviour
 
             playerHealth.TakeDamage(damage);
             ZombieAttack();
+            
 
 
 

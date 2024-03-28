@@ -7,6 +7,7 @@ public class EnemyFollow : MonoBehaviour
 {
     public Transform target;
     public float speed;
+    private  PlayerHealth playerHealth;
     
     private Animator animator;
     
@@ -26,13 +27,12 @@ public class EnemyFollow : MonoBehaviour
     {
         
        transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-        
 
 
-
-
+      
     }
 
+    
     
 }
 

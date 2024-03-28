@@ -4,32 +4,50 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    private PlayerController _playerController;
+    private PlayerController playerController;
+    
 
     public int maxHealth;
-    public int health;
-    private Animator anim;
+    public int currentHealth;
+    private Animator animator;
+    private bool isDead = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
-        _playerController = GetComponent<PlayerController>();
-        health = maxHealth;
+        animator = GetComponent<Animator>();
+        playerController = GetComponent<PlayerController>();
+        currentHealth = maxHealth;
     }
 
     public void TakeDamage(int damage)
     {
-        health -= damage;
-
-        if (health <= 0)
+        if (!isDead)
         {
+            currentHealth -= damage; // Hasarý mevcut saðlýktan çýkar
 
-          _playerController.Die();
-
-            
-            
+            if (currentHealth <= 0)
+            {
+                currentHealth = 0;
+                Die(); // Eðer saðlýk sýfýra düþerse, karakteri öldür
+            }
         }
+    }
 
+    public void Die()
+    {
+        isDead = true;
+
+        animator.SetTrigger("die");
+        GetComponent<PlayerController>().enabled = false;
+        GetComponent<PlayerAttack>().enabled = false;
+
+        
+    }
+
+    // Karakterin ölüp ölmediðini kontrol eden metod
+    public bool IsDead()
+    {
+        return isDead;
     }
 }
