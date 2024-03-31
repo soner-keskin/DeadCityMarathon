@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    private PlayerController playerController;
+    private PlayerController _playerController;
+    private PlayerAttack _playerAttack;
     
 
     public int maxHealth;
@@ -16,7 +17,9 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        playerController = GetComponent<PlayerController>();
+        _playerAttack = GetComponent<PlayerAttack>();
+        _playerController = GetComponent<PlayerController>(); 
+        
         currentHealth = maxHealth;
     }
 
@@ -34,15 +37,18 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    public void Die()
+
+    void Die()
     {
         isDead = true;
 
         animator.SetTrigger("die");
-        GetComponent<PlayerController>().enabled = false;
-        GetComponent<PlayerAttack>().enabled = false;
 
-        
+        GetComponent<PlayerAttack>().enabled = false;
+        GetComponent<PlayerController>().enabled = false;
+        GetComponent<PlayerHealth>().enabled = false;
+
+
     }
 
     // Karakterin ölüp ölmediðini kontrol eden metod

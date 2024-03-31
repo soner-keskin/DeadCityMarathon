@@ -9,7 +9,7 @@ public class EnemyAttack : MonoBehaviour
     private Animator animator;
     private Transform player; // Oyuncunun pozisyonunu tutmak için
     private PlayerHealth playerHealth; // Oyuncunun saðlýk bileþeni
-    private PlayerController playerController;
+   
 
     private bool canAttack = true; // Saldýrýyý yapma izni
 

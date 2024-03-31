@@ -5,14 +5,17 @@ using UnityEngine;
 public class ZombieDamage : MonoBehaviour
 {
     public int damage;
-    public PlayerHealth playerHealth;
+    public PlayerHealth _playerHealth;
     Animator animator;
     
 
 
-    private void Awake()
+    private void Start()
     {
         animator = GetComponent<Animator>();
+        _playerHealth = GetComponent<PlayerHealth>();
+
+        
     }
 
     private void Update()
@@ -20,14 +23,15 @@ public class ZombieDamage : MonoBehaviour
 
         
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter(Collision other)
     {
 
-        if(collision.gameObject.tag == "Player")
+        if(other.gameObject.tag == "Player")
         {
 
-            playerHealth.TakeDamage(damage);
-            ZombieAttack();
+
+            animator.SetTrigger("attack");
+            _playerHealth.TakeDamage(damage);
             
 
 
@@ -36,9 +40,5 @@ public class ZombieDamage : MonoBehaviour
     }
 
     
-    private void ZombieAttack()
-    {
-        animator.SetTrigger("attack");
-        
-    }
+    
 }

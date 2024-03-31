@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 1.0f;
+    public float moveSpeed = 2.0f;
     public float horizontalInput;
     public float jumpPower = 3.0f;
     bool isFacingRight = true;
     bool isGrounded = false;
     bool isDead = false;
+
 
 
     Rigidbody2D rb;
@@ -44,7 +45,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        
+
 
 
     }
@@ -56,7 +57,7 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("yVelocity", rb.velocity.y);
     }
 
-    public void FlipSprite() 
+    public void FlipSprite()
     {
 
         if (isFacingRight && horizontalInput < 0f || !isFacingRight && horizontalInput > 0f)
@@ -91,7 +92,9 @@ public class PlayerController : MonoBehaviour
 
         moveSpeed = 0f;
 
-        
+
 
     }
+
+    
 }
