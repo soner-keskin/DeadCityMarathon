@@ -6,6 +6,8 @@ public class Projectile : MonoBehaviour
     private float direction;
     private bool hit;
     private float lifetime;
+    public int damage;
+    
 
     private Animator anim;
     private BoxCollider2D boxCollider;
@@ -14,6 +16,7 @@ public class Projectile : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
+        
     }
     private void Update()
     {
@@ -29,6 +32,15 @@ public class Projectile : MonoBehaviour
         hit = true;
         boxCollider.enabled = false;
         anim.SetTrigger("explode");
+
+        EnemyHealth enemyHealth = collision.GetComponent<EnemyHealth>();
+        if (enemyHealth != null)
+        {
+            enemyHealth.TakeDamage(damage); // Düþmana hasar ver
+            gameObject.SetActive(false); // Mermiyi devre dýþý býrak
+        }
+
+
     }
     public void SetDirection(float _direction)
     {

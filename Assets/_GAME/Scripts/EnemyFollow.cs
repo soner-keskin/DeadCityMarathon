@@ -9,6 +9,7 @@ public class EnemyFollow : MonoBehaviour
     public float speed;
     private  PlayerHealth playerHealth;
     
+    
     private Animator animator;
     
     // Start is called before the first frame update

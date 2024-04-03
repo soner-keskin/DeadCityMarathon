@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
@@ -19,32 +17,33 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetMouseButton(0) && cooldownTimer > attackCooldown && playerController.canAttack()) 
-
-
+        if (Input.GetMouseButton(0) && cooldownTimer > attackCooldown && playerController.canAttack())
             Attack();
 
         cooldownTimer += Time.deltaTime;
-                
     }
-
 
     private void Attack()
     {
         anim.SetTrigger("attack");
         cooldownTimer = 0;
 
-        bullets[FindBullets()].transform.position = bulletPoint.position;
-        bullets[FindBullets()].GetComponent<Projectile>().SetDirection(Mathf.Sign(transform.localScale.x));
+        GameObject bullet = GetInactiveBullet();
+        if (bullet != null)
+        {
+            bullet.transform.position = bulletPoint.position;
+            bullet.GetComponent<Projectile>().SetDirection(transform.localScale.x); // Mermi yönünü ayarla
+            bullet.SetActive(true); // Mermiyi aktif et
+        }
     }
 
-    private int FindBullets()
+    private GameObject GetInactiveBullet()
     {
-        for (int i = 0; i < bullets.Length; i++)
+        foreach (GameObject bullet in bullets)
         {
-            if (!bullets[i].activeInHierarchy)
-                return i;
+            if (!bullet.activeInHierarchy)
+                return bullet;
         }
-        return 0;
+        return null;
     }
 }
