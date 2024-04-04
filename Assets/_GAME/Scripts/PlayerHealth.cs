@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
     private PlayerController _playerController;
     private PlayerAttack _playerAttack;
     
+    
 
     public int maxHealth;
     public int currentHealth;
@@ -20,6 +21,7 @@ public class PlayerHealth : MonoBehaviour
         _playerAttack = GetComponent<PlayerAttack>();
         _playerController = GetComponent<PlayerController>(); 
         
+        
         currentHealth = maxHealth;
     }
 
@@ -32,7 +34,11 @@ public class PlayerHealth : MonoBehaviour
             if (currentHealth <= 0)
             {
                 currentHealth = 0;
-                Die(); // Eðer saðlýk sýfýra düþerse, karakteri öldür
+
+                Die();
+
+                
+
             }
         }
     }
@@ -56,4 +62,6 @@ public class PlayerHealth : MonoBehaviour
     {
         return isDead;
     }
+
+   
 }
