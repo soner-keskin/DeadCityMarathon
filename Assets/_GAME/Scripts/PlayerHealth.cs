@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -9,10 +10,11 @@ public class PlayerHealth : MonoBehaviour
     
     
 
-    public int maxHealth;
+    public int maxHealth = 200;
     public int currentHealth;
     private Animator animator;
     private bool isDead = false;
+    
 
     // Start is called before the first frame update
     void Start()
